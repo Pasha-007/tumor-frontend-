@@ -23,7 +23,7 @@ const UploadForm = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:8000/predict/",
+        "https://your-backend-url/predict/",
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
@@ -37,15 +37,14 @@ const UploadForm = () => {
 
   return (
     <div className="upload-container">
-      <h2>Upload an Image</h2>
-      <input type="file" accept="image/*" onChange={handleFileChange} />
-      <button onClick={handleSubmit}>
-        {loading ? "Processing..." : "Upload & Predict"}
-      </button>
-
+      <div className="upload-box">
+        <input type="file" accept="image/*" onChange={handleFileChange} className="file-input" />
+        <button onClick={handleSubmit} className="upload-button">
+          {loading ? "Processing..." : "Upload & Predict"}
+        </button>
+      </div>
       {prediction && <p className="result">Prediction: {prediction}</p>}
     </div>
   );
 };
-
 export default UploadForm;
